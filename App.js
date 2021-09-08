@@ -14,6 +14,16 @@ export default function App() {
   const [estado, setarEstado] = useState("leitura");
   const [anotacao, setarAnotacao] = useState('');
 
+  useEffect(() =>{
+    //Quando inicializar o app, queremos que leia o ray anotacao.
+    (async () => {
+      try{
+        const anotacaoLeitura = await AsyncStorage.getItem('anotacao');
+        setarAnotacao(anotacaoLeitura)
+      }catch(error){}
+    })
+  },[])
+
   setData = async() => {
     try{
       await AsyncStorage.setItem('anotacao',anotacao);
